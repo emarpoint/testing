@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block content %}
+  <main role="main">
+        <div class="container mb-5">
+            <div class="row">
+                {% if profile %}
+                    <div class="col-md-5">
+               
+
+                        <h3> Название теста - {{ profile.name }}</h3>
+                        <p>Время выполнения (мин) &nbsp;-&nbsp;{{ profile.work_time }}</p>
+                        <p>Количество вопросов (шт.) &nbsp;-&nbsp;{{ profile.questions_count }}</p>
+                    </div>
+                {% endif %}
+            </div>
+
+                <a href="{% url "answer:test_start" %}"><button type="submit" class="btn btn-primary">Начать тест</button></a>
+    </div>
+    </main> 
+{% endblock %} 
+                         
+
+

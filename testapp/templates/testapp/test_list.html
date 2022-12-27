@@ -1,0 +1,34 @@
+ {% extends "base.html" %} 
+{% load static %}
+
+{% block title %}
+    {% if category %}{{ category.name }}{% else %}Products{% endif %}
+{% endblock %}
+
+{% block content %}
+    <div id="sidebar">
+        <h3>Категории</h3>
+        <ul>
+            <li {% if not category %}class="selected"{% endif %}>
+                <a href="{% url "testapp:product_list" %}">Все тесты</a>
+            </li>
+            {% for c in categories %}
+                <li {% if category.slug == c.slug %}class="selected"{% endif %}>
+                    <a href="{{ c.get_absolute_url }}">{{ c.name }}</a>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+    <div id="main" class="product-list">
+        <h1>{% if category %}{{ category.name }}{% else %}Тесты{% endif %}</h1>
+        {% for item_profile in profile %}
+            <div class="item">
+                {% comment %} <a href="{{ product.get_absolute_url }}">
+                    <img src="{% if product.image %}{{ product.image.url }}{%else%}{% static "img/no_image.png" %}{% endif %}">
+                </a> {% endcomment %}
+                <a href="{{ item_profile.get_absolute_url }}">{{ item_profile.name }}</a>
+
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}
